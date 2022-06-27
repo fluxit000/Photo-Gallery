@@ -6,7 +6,7 @@ const SearchInput = props =>{
 
     useEffect(()=>{
         const timeOut = setTimeout(() => {
-            console.log(searchValue)
+            props.fetchPictures(searchValue)
         }, 500);
 
         return ()=>clearTimeout(timeOut)
