@@ -1,25 +1,12 @@
-import { useEffect, useState } from "react"
+import {useContext} from "react"
 import './gallery.css'
+import galleryAPI from "../store/galleryAPI"
 
 const Gallery = props =>{
-    // const [picturesRes, setPicturesRes] = useState([])
-
-    useEffect(() => {
-        // fetch("https://api.pexels.com/v1/search?"+new URLSearchParams({query: "waterfall",orientation:"portrait"}),
-        //     {headers: {Authorization: "563492ad6f917000010000018f1e5fe94faf400987592c0a0cf15f1a"}}
-        // )
-        // .then((response)=>response.json())
-        // .then((response)=>response.photos)
-        // .then((pictures)=>{
-        //     setPicturesRes(pictures)
-        // })
-
-        console.log(props)
-
-    },[]);
+    const ctx = useContext(galleryAPI)
 
     return <div id="picture-container">
-    {props.pictures.map(picture=>
+    {ctx.pictures.map(picture=>
         <img className="picture" key={picture.id} src={picture.src.portrait}/>
     )}
     </div>

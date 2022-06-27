@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useContext } from 'react'
 import './searchInput.css'
+import galleryAPI from "../store/galleryAPI"
 
 const SearchInput = props =>{
     const [searchValue, setSearchValue] = useState("")
 
+    const ctx = useContext(galleryAPI)
+
     useEffect(()=>{
         const timeOut = setTimeout(() => {
-            props.fetchPictures(searchValue)
+            ctx.fetchPictures(searchValue)
         }, 500);
 
         return ()=>clearTimeout(timeOut)
