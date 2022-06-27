@@ -25,10 +25,14 @@ function App() {
   }
 
 
-  return (<div>
-    <SearchInput fetchPictures={fetchPictures}/>
-    <Gallery pictures={pictures} fetchPictures={fetchPictures}/>
-  </div>);
+  return (<main>
+    <section>
+      <SearchInput fetchPictures={fetchPictures}/>
+    </section>
+    <article>
+      <Gallery pictures={pictures} fetchPictures={fetchPictures}/>
+    </article>
+  </main>);
 }
 
 export default App;
