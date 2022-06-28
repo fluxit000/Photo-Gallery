@@ -8,8 +8,8 @@
     align-items: center;
 }
 #popup>img{
-    max-height: 90%;
-    max-width: 40%;
+    max-height: 94%;
+    max-width: 60%;
     margin: 2px;
 }
 #popup>button{
@@ -18,18 +18,31 @@
     background-color: #455d7a;
     opacity: 0.9;
     color: #c5ceda;
-    font-size: 128px;
-    height: 128px;
+    font-size: 100px;
+    height: 100px;
     line-height: 0;
-    width: 128px;
+    width: 100px;
+    padding: 1%;
     cursor: pointer;
     border-radius: 50%;
+}
+@media only screen and (max-width: 768px) {
+    #popup>button{
+        font-size: 64px;
+        height: 64px;
+        width: 64px;
+    }
+    #popup>img{
+        max-height: 65%;
+        max-width: 65%;
+        margin: 2px;
+    }
 }
 
 
 .left::before{
-    content: ">";
+    content: "<";
 }
 .right::before{
-    content: "<";
+    content: ">";
 }

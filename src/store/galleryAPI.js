@@ -3,12 +3,15 @@ import defData from '../defData'
 
 const GalleryAPI = createContext({
     fetchPictures: () => {},
-    pictures: []
+    pictures: [],
+    popupImageId: -1,
+    setPopupImageId: (id) => {}
 })
 
 
 export const GalleryConextProvider = props=>{
     const [pictures, setPictures] = useState(defData)
+    const [popupImageId, setPopupImageId] = useState(-1)
 
     const fetchPictures = (query)=>{
       if(query != ""){
@@ -29,7 +32,7 @@ export const GalleryConextProvider = props=>{
 
 
 
-    return <GalleryAPI.Provider value={{fetchPictures, pictures}}>{props.children}</GalleryAPI.Provider>
+    return <GalleryAPI.Provider value={{fetchPictures, pictures, popupImageId,setPopupImageId}}>{props.children}</GalleryAPI.Provider>
 }
 
 

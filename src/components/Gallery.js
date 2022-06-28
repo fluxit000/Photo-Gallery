@@ -7,13 +7,14 @@ const Gallery = props =>{
     const ctx = useContext(galleryAPI)
 
     return <div id="picture-container">
-    {ctx.pictures.map(picture=>
+    {ctx.pictures.map((picture, index)=>
         <LazyLoadImage
         className="picture" 
         key={picture.id}
         src={picture.src.portrait}
         width={200}
         height={300}
+        onClick={()=>ctx.setPopupImageId(index)}
         // placeholderSrc="loading.gif"
         />
     )}
