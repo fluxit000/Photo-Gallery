@@ -1,0 +1,35 @@
+#popup{
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#popup>img{
+    max-height: 90%;
+    max-width: 40%;
+    margin: 2px;
+}
+#popup>button{
+    border: none;
+    overflow: hidden;
+    background-color: #455d7a;
+    opacity: 0.9;
+    color: #c5ceda;
+    font-size: 128px;
+    height: 128px;
+    line-height: 0;
+    width: 128px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+
+.left::before{
+    content: ">";
+}
+.right::before{
+    content: "<";
+}

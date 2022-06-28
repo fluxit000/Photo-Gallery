@@ -8,6 +8,10 @@ body {
   background: #233142;
 }
 
+*{
+  overflow-x: hidden;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
