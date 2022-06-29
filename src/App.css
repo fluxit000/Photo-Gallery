@@ -1,0 +1,11 @@
+#pexels{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: #233142;
+    border-top: 1px solid #696f77;
+    color: #696f77;
+    font-size: 30px;
+    padding: 15px 0 15px 0;
+}

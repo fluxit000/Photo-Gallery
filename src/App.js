@@ -11,7 +11,7 @@ function App() {
   const ctx = useContext(galleryAPI)
   const render = ctx.popupImageId != -1
 
-  return (<main>
+  return (<><main>
     {render && <Popup />}
     <section>
       <SearchInput/>
@@ -19,7 +19,10 @@ function App() {
     <article>
       <Gallery/>
     </article>
-  </main>);
+  </main>
+  <footer><span id='pexels'>Photos provided by Pexels</span></footer>
+  </>
+  );
 }
 
 export default App;

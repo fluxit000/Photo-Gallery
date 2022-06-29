@@ -36,8 +36,7 @@ const Popup = props =>{
 
     return <div id='popup' onClick={onBackgroundClick}>
         <button className='left' onClick={switchImage}></button>
-        <LazyLoadImage 
-        // src='https://images.pexels.com/photos/358457/pexels-photo-358457.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800'
+        <LazyLoadImage
         src={ctx.pictures[ctx.popupImageId].src.portrait}
         height={1200}
         width={600}

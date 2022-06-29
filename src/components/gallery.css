@@ -4,6 +4,24 @@
     justify-content: center;
     margin: 0 auto;
 }
-.picture{
+.picture-holder{
     margin: 3px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 200px;
+}
+.picture{
+    cursor: pointer;
+}
+.credits{
+    margin: 0;
+    background-color: #455d7a;
+    color: #c5ceda;
+    width: 100%;
+    height: 60px;
+}
+.credits > a{
+    color: #80a4d3;
+    text-decoration: none;
 }
