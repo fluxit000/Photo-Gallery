@@ -7,12 +7,14 @@
     justify-content: center;
     align-items: center;
     z-index: 1;
+    overflow: hidden;
 }
 #popup>img{
     max-height: 94%;
     max-width: 60%;
     margin: 2px;
 }
+
 #popup>button{
     border: none;
     overflow: hidden;
