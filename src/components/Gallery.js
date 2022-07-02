@@ -8,10 +8,9 @@ const Gallery = props =>{
 
     return <div id="picture-container">
     {ctx.pictures.map((picture, index)=>
-        <div className="picture-holder">
+        <div className="picture-holder" key={picture.id}>
             <LazyLoadImage
             className="picture"
-            key={picture.id}
             src={picture.src.original+"?auto=compress&cs=tinysrgb&fit=crop&h=300&w=200"}//portrait
             width={200}
             height={300}
