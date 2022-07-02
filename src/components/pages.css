@@ -1,0 +1,22 @@
+#pages-container{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+}
+.number-holder{
+    background-color: #455d7a;
+    padding: 0 5px 0 5px;
+    border: 1px solid #696f77;
+    color: rgb(211, 211, 211);
+}
+.enable{
+    cursor: pointer;
+}
+.enable:hover{
+    background-color: #2d517c;
+}
+.current{
+    background-color: rgb(60, 80, 109);
+}

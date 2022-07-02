@@ -4,11 +4,14 @@
     justify-content: center;
     margin: 0 auto;
 
-    padding: 20px;
-    margin: 15px;
-
+    padding: 10px;
+    padding-bottom: 0;
+}
+#picture-border{
     border: solid 2px #455d7a;
     border-radius: 25px;
+    margin: 10px 15px 0 15px;
+    
 }
 .picture-holder{
     margin: 3px;

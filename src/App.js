@@ -1,9 +1,11 @@
 import './App.css';
+import { useContext } from 'react';
+
 import Gallery from './components/Gallery';
 import SearchInput from './components/SearchInput'
 import Popup from './components/Popup';
 import galleryAPI from './store/galleryAPI';
-import { useContext } from 'react';
+import Pages from "./components/pages"
 
 function App() {
 
@@ -16,11 +18,12 @@ function App() {
     <section>
       <SearchInput/>
     </section>
-    <article>
+    <article id='picture-border'>
       <Gallery/>
+      <Pages/>
     </article>
   </main>
-  <footer><span id='pexels'>Photos provided by Pexels</span></footer>
+  <footer>Photos provided by Pexels</footer>
   </>
   );
 }

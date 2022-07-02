@@ -1,15 +1,12 @@
-#pexels{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+
+footer{
+    margin-top: 30px;
     text-align: center;
+
+    width: 100%;
     background-color: #233142;
     border-top: 1px solid #696f77;
     color: #696f77;
     font-size: 30px;
     padding: 15px 0 15px 0;
-    z-index: 0;
-}
-footer{
-    margin-top: 100px;
 }
