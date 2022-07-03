@@ -26,9 +26,11 @@ const Pages = props =>{
             }
         }
         else if(ctx.currentPageNumber === ctx.lastPageNumber){
-            toMap.push(1)
-            toMap.push("...")
-            for(let i = ctx.lastPageNumber-wohMuchStep; i <= ctx.lastPageNumber; i++){
+            if(ctx.currentPageNumber-wohMuchStep > 1){
+                toMap.push(1)
+                toMap.push("...")
+            }
+            for(let i = ctx.currentPageNumber-wohMuchStep<0? 1:ctx.currentPageNumber-wohMuchStep; i <= ctx.lastPageNumber; i++){
                 toMap.push(i)
             }
         }

@@ -28,6 +28,7 @@ export const GalleryConextProvider = props=>{
         .then((response)=>response.json())
         .then((response)=>{
           //console.log(response)
+          setCurrentPageNumber(1)
           
           setPictures(response.photos)
           setLastPageNumber(Number(((response.total_results+1)/15).toFixed(0)))
@@ -35,22 +36,30 @@ export const GalleryConextProvider = props=>{
         })
       }
       else{
-        setLastPageNumber(204)
+        // setCurrentPageNumber(1)
+        // setLastPageNumber(204)
+        // setCurrentQuery("waterfall")
+        // setPictures(defData)
+
+        setLastPageNumber(50)
+        setCurrentPageNumber(0)
         setCurrentQuery("waterfall")
         setPictures(defData)
       }
     }
 
     const onSetCurrentPN = page=>{
-      fetch("https://api.pexels.com/v1/search?"+new URLSearchParams(
-        {query: currentQuery, orientation: "landscape", page}),
-        {headers: {Authorization: "563492ad6f917000010000018f1e5fe94faf400987592c0a0cf15f1a"}}
-      )
-      .then((response)=>response.json())
-      .then((response)=>{
-        setCurrentPageNumber(page)
-        setPictures(response.photos)
-      })
+      if(page <= lastPageNumber && page > 0){
+        fetch("https://api.pexels.com/v1/search?"+new URLSearchParams(
+          {query: currentQuery, orientation: "landscape", page}),
+          {headers: {Authorization: "563492ad6f917000010000018f1e5fe94faf400987592c0a0cf15f1a"}}
+        )
+        .then((response)=>response.json())
+        .then((response)=>{
+          setCurrentPageNumber(page)
+          setPictures(response.photos)
+        })
+      }
     }
 
 
