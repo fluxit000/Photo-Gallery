@@ -7,8 +7,6 @@ import {GalleryConextProvider} from './store/galleryAPI';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <GalleryConextProvider>
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>
+    <App />
   </GalleryConextProvider>
 );

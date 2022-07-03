@@ -1,9 +1,9 @@
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import './popup.css'
 import galleryAPI from "../store/galleryAPI"
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
-const Popup = props =>{
+const Popup = () =>{
     const ctx = useContext(galleryAPI)
 
 
@@ -13,10 +13,9 @@ const Popup = props =>{
         }
     }
 
-    const switchImage = e=>{
-        const currentIndex = ctx.popupImageId
-        if(e.target.className === "left"){
-            if(currentIndex === 0){
+    const switchImage = direction=>{
+        if(direction === "left"){
+            if(ctx.popupImageId === 0){
                 ctx.setPopupImageId(ctx.pictures.length-1)
             }
             else{
@@ -24,7 +23,7 @@ const Popup = props =>{
             }
         }
         else{
-            if(currentIndex === ctx.pictures.length-1){
+            if(ctx.popupImageId === ctx.pictures.length-1){
                 ctx.setPopupImageId(0)
             }
             else{
@@ -32,16 +31,32 @@ const Popup = props =>{
             }
         }
     }
+
+    useEffect(()=>{
+        const onArrowClick = e =>{
+            console.log(e)
+            if(e.code === "ArrowRight"){
+                switchImage("right")
+            }
+            else if(e.code === "ArrowLeft"){
+                switchImage("left")
+            }
+        }
+
+        window.addEventListener('keydown', onArrowClick)
+
+        return ()=> window.removeEventListener('keydown', onArrowClick)
+    },[ctx.popupImageId])
     
 
     return <div id='popup' onClick={onBackgroundClick}>
-        <button className='left' onClick={switchImage}></button>
+        <button className='left' onClick={()=>switchImage("left")}></button>
         <LazyLoadImage
         src={ctx.pictures[ctx.popupImageId].src.portrait}
         height={1200}
         width={600}
         />
-        <button className='right' onClick={switchImage}></button>
+        <button className='right' onClick={()=>switchImage("right")}></button>
     </div>
 }
 

@@ -1,5 +1,5 @@
 import './App.css';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import Gallery from './components/Gallery';
 import SearchInput from './components/SearchInput'
@@ -12,6 +12,7 @@ function App() {
 
   const ctx = useContext(galleryAPI)
   const render = ctx.popupImageId != -1
+  
 
   return (<><main>
     {render && <Popup />}
