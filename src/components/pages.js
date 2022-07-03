@@ -37,9 +37,8 @@ const Pages = props =>{
                 toMap.push(1)
                 toMap.push("...")
             }
-            console.log(ctx.currentPageNumber-wohMuchStep)
             for(let i = ctx.currentPageNumber-wohMuchStep<0? 1:ctx.currentPageNumber-wohMuchStep; i <=  ctx.currentPageNumber; i++){
-                if(i === ctx.currentPageNumber){
+                if(i === ctx.currentPageNumber || i === 0){
                     continue
                 }
                 else if(ctx.lastPageNumber === i){
@@ -53,6 +52,7 @@ const Pages = props =>{
                     continue
                 }
                 else if(ctx.lastPageNumber === i){
+                    toMap.push(i)
                     break;
                 }
                 toMap.push(i)
