@@ -14,19 +14,19 @@ function App() {
   const render = ctx.popupImageId != -1
   
 
-  return (<><main>
-    {render && <Popup />}
-    <section>
-      <SearchInput/>
-    </section>
-    <article id='picture-border'>
-      <Gallery/>
-      <Pages/>
-    </article>
-  </main>
-  <footer>Photos provided by Pexels</footer>
-  </>
-  );
+  return (<div id='contner'>
+      <main>
+        {render && <Popup />}
+        <section>
+          <SearchInput/>
+        </section>
+        <article id='picture-border'>
+          <Gallery/>
+          <Pages/>
+        </article>
+      </main>
+      <footer>Photos provided by Pexels</footer>
+  </div>);
 }
 
 export default App;
