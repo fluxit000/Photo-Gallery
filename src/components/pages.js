@@ -35,9 +35,12 @@ const Pages = props =>{
             }
         }
         else{
-            if(ctx.currentPageNumber-wohMuchStep > 1){
+            if(ctx.currentPageNumber-wohMuchStep > 2){
                 toMap.push(1)
                 toMap.push("...")
+            }
+            else if(ctx.currentPageNumber > wohMuchStep+1){
+                toMap.push(1)
             }
             for(let i = ctx.currentPageNumber-wohMuchStep<0? 1:ctx.currentPageNumber-wohMuchStep; i <=  ctx.currentPageNumber; i++){
                 if(i === ctx.currentPageNumber || i === 0){
@@ -71,12 +74,12 @@ const Pages = props =>{
 
 
     const onChangePage = page =>{
-        if(page.target.outerText !== "..."){
+        if(page.target.outerText !== "..." && page.target.outerText != ctx.currentPageNumber){
             ctx.onSetCurrentPN(Number(page.target.outerText))
         }
     }
 
-    return <div id="pages-container">
+    return <div id="pages-container" className={ctx.isPageLoading? "loading" : ""}>
         {/* <div className="number-holder">1</div>
         <div className="number-holder">2</div>
         <div className="number-holder">3</div>

@@ -34,3 +34,6 @@
     color: #80a4d3;
     text-decoration: none;
 }
+.loading{
+    opacity: 0.2;
+}
