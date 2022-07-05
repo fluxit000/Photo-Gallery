@@ -9,7 +9,8 @@ const GalleryAPI = createContext({
     lastPageNumber: 0,
     currentPageNumber: 1,
     onSetCurrentPN: (page) => {},
-    isPageLoading: false
+    isPageLoading: false,
+    isError: false
 })
 
 
@@ -20,6 +21,7 @@ export const GalleryConextProvider = props=>{
     const [currentPageNumber, setCurrentPageNumber] = useState(1)
     const [currentQuery, setCurrentQuery] = useState("")
     const [isPageLoading, setIsPageLoading] = useState(false)
+    const [isError, setIsError] = useState(false)//is request has error
 
     const fetchPictures = (query)=>{
       if(query != ""){
@@ -30,10 +32,23 @@ export const GalleryConextProvider = props=>{
         )
         .then((response)=>response.json())
         .then((response)=>{
-          setCurrentPageNumber(1)
+          setIsError(false)
+          if(response.total_results !== 0){
+            setCurrentPageNumber(1)
           
-          setPictures(response.photos, setIsPageLoading(false))
-          setLastPageNumber(Number(((response.total_results+1)/15).toFixed(0)))
+            setPictures(response.photos, setIsPageLoading(false))
+            setLastPageNumber(Number(((response.total_results+1)/15).toFixed(0)))
+          }
+          else{
+            setLastPageNumber(0)
+            setPictures([], setIsPageLoading(false))
+          }
+        })
+        .catch((e)=>{
+          console.log(e)
+          setLastPageNumber(0)
+          setIsError(true)
+          setPictures([], setIsPageLoading(false))
         })
       }
       else{
@@ -63,7 +78,7 @@ export const GalleryConextProvider = props=>{
 
     return <GalleryAPI.Provider value={
       {fetchPictures, pictures, popupImageId, setPopupImageId, 
-      lastPageNumber, currentPageNumber, onSetCurrentPN, isPageLoading
+      lastPageNumber, currentPageNumber, onSetCurrentPN, isPageLoading, isError
       }}>
         {props.children}
       </GalleryAPI.Provider>

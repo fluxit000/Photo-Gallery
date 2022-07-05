@@ -8,6 +8,9 @@ const Pages = props =>{
     let toMap = []
 
     const pagesRender = ()=> {
+        if(ctx.lastPageNumber <= 0){
+            return
+        }
         toMap = []
         const wohMuchStep = 4
         if(ctx.currentPageNumber === 1){

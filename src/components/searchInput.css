@@ -15,3 +15,6 @@
     background-color: #455d7a;
     color: #c5ceda;
 }
+#search-input::placeholder{
+    color: #b9c7da;
+}

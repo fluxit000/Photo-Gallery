@@ -37,3 +37,8 @@
 .loading{
     opacity: 0.2;
 }
+.error{
+    display: flex;
+    flex-direction: column;
+    color: white;
+}

@@ -6,7 +6,10 @@ import { LazyLoadImage } from "react-lazy-load-image-component"
 const Gallery = props =>{
     const ctx = useContext(galleryAPI)
 
+
     return <div id="picture-container">
+    {ctx.isError && <div className="error"><img src="/error.png"/><h1>Something go wrong</h1></div>}
+    {!ctx.isError && ctx.pictures.length === 0 && <div className="error"><img src="/error.png"/><h1>Not found any images</h1></div>}
     {ctx.pictures.map((picture, index)=>
         <div className={"picture-holder "+ (ctx.isPageLoading? "loading" : "")} key={picture.id}>
             <LazyLoadImage
