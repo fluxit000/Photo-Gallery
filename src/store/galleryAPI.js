@@ -15,7 +15,7 @@ const GalleryAPI = createContext({
 
 
 export const GalleryConextProvider = props=>{
-    const [pictures, setPictures] = useState(defData)
+    const [pictures, setPictures] = useState([])
     const [popupImageId, setPopupImageId] = useState(-1)
     const [lastPageNumber, setLastPageNumber] = useState(0)
     const [currentPageNumber, setCurrentPageNumber] = useState(1)
@@ -35,9 +35,10 @@ export const GalleryConextProvider = props=>{
         .then((response)=>{
           if(response.total_results !== 0){
             setCurrentPageNumber(1)
-          
-            setPictures(response.photos, setIsPageLoading(false))
-            setLastPageNumber(Number(((response.total_results+1)/15).toFixed(0)))
+            setLastPageNumber(Number(((response.total_results+1)/15).toFixed(0)), setPictures(response.photos))
+            setIsPageLoading(false)
+            
+            
           }
           else{
             setLastPageNumber(0)
@@ -53,9 +54,8 @@ export const GalleryConextProvider = props=>{
       }
       else{
         setCurrentPageNumber(1)
-        setLastPageNumber(204)
+        setLastPageNumber(204, setPictures(defData))
         setCurrentQuery("waterfall")
-        setPictures(defData)
       }
     }
 

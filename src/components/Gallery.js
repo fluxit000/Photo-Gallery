@@ -1,10 +1,14 @@
-import {useContext} from "react"
+import {useContext, useEffect} from "react"
 import './gallery.css'
 import galleryAPI from "../store/galleryAPI"
 import { LazyLoadImage } from "react-lazy-load-image-component"
 
 const Gallery = props =>{
     const ctx = useContext(galleryAPI)
+
+    useEffect(()=>{
+        ctx.fetchPictures("")
+    },[])
 
 
     return <div id="picture-container">
