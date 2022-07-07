@@ -16,7 +16,7 @@ const SearchInput = props =>{
     },[searchValue])
 
     return <div id="search-container" onChange={(input)=>setSearchValue(input.target.value)}>
-        <input placeholder="Search1 for images" type="text" id="search-input"/>
+        <input placeholder="Search for images" type="text" id="search-input"/>
     </div>
 }
 
