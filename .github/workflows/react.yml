@@ -10,7 +10,7 @@ on:
 jobs:
   build:
 
-    runs-on: s10.mikr.us
+    runs-on: self-hosted
 
     strategy:
       matrix:
