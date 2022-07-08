@@ -1,5 +1,7 @@
 import './App.css';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
+
+import { Transition } from 'react-transition-group';
 
 import Gallery from './components/Gallery';
 import SearchInput from './components/SearchInput'
@@ -11,12 +13,18 @@ function App() {
 
 
   const ctx = useContext(galleryAPI)
-  const render = ctx.popupImageId != -1
+  const render = ctx.isPopupShow
+
+  console.log(render)
   
 
   return (<div id='contner'>
       <main>
-        {render && <Popup />}
+        <Transition in={render} onExited={()=>ctx.setPopupImageId(-1)} timeout={500}>
+          {state => (
+            state !== "exited" && <Popup state={state}/>
+          )}
+        </Transition>
         <section>
           <SearchInput/>
         </section>

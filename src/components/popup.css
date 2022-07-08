@@ -9,6 +9,32 @@
     z-index: 1;
     overflow: hidden;
 }
+
+.popup-close{
+    animation: fadeOut 0.5s both;
+}
+.popup-open{
+    animation: fadeIn 0.5s;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
 #popup>img{
     max-height: 94%;
     max-width: 60%;
@@ -29,6 +55,7 @@
     cursor: pointer;
     border-radius: 50%;
 }
+
 @media only screen and (max-width: 768px) {
     #popup>button{
         font-size: 64px;

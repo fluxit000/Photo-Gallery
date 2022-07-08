@@ -3,13 +3,14 @@ import './popup.css'
 import galleryAPI from "../store/galleryAPI"
 import { useContext, useEffect } from 'react'
 
-const Popup = () =>{
+const Popup = ({state}) =>{
     const ctx = useContext(galleryAPI)
 
+    console.log(state)
 
     const onBackgroundClick = e =>{
         if(e.target.id === "popup"){
-            ctx.setPopupImageId(-1)
+            ctx.setIsPopupShow(false)
         }
     }
 
@@ -49,7 +50,7 @@ const Popup = () =>{
     },[ctx.popupImageId])
     
 
-    return <div id='popup' onClick={onBackgroundClick}>
+    return <div id='popup' className={state === "exiting"? "popup-close": "popup-open"} onClick={onBackgroundClick}>
         <button className='left' onClick={()=>switchImage("left")}></button>
         <LazyLoadImage
         src={ctx.pictures[ctx.popupImageId].src.portrait}

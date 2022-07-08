@@ -2,26 +2,33 @@ import {createContext, useEffect, useState, } from 'react'
 import defData from '../defData'
 
 const GalleryAPI = createContext({
-    fetchPictures: () => {},
+    fetchPictures: query => {},
     pictures: [],
     popupImageId: -1,
-    setPopupImageId: (id) => {},
+    setPopupImageId: id => {},
     lastPageNumber: 0,
     currentPageNumber: 1,
-    onSetCurrentPN: (page) => {},
+    onSetCurrentPN: page => {},
     isPageLoading: false,
-    isError: false
+    isError: false,
+    isPopupShow: false, 
+    setIsPopupShow: state => {}
 })
 
 
 export const GalleryConextProvider = props=>{
     const [pictures, setPictures] = useState([])
-    const [popupImageId, setPopupImageId] = useState(-1)
-    const [lastPageNumber, setLastPageNumber] = useState(0)
-    const [currentPageNumber, setCurrentPageNumber] = useState(1)
-    const [currentQuery, setCurrentQuery] = useState("")
     const [isPageLoading, setIsPageLoading] = useState(false)
     const [isError, setIsError] = useState(false)//is request has error
+    const [currentQuery, setCurrentQuery] = useState("")
+
+    const [popupImageId, setPopupImageId] = useState(-1)
+    const [isPopupShow, setIsPopupShow] = useState(false)
+
+    const [lastPageNumber, setLastPageNumber] = useState(0)
+    const [currentPageNumber, setCurrentPageNumber] = useState(1)
+
+
 
     const fetchPictures = (query)=>{
       if(query != ""){
@@ -74,11 +81,10 @@ export const GalleryConextProvider = props=>{
       }
     }
 
-
-
     return <GalleryAPI.Provider value={
       {fetchPictures, pictures, popupImageId, setPopupImageId, 
-      lastPageNumber, currentPageNumber, onSetCurrentPN, isPageLoading, isError
+      lastPageNumber, currentPageNumber, onSetCurrentPN, isPageLoading, isError,
+      isPopupShow, setIsPopupShow
       }}>
         {props.children}
       </GalleryAPI.Provider>

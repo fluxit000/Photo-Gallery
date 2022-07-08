@@ -21,7 +21,7 @@ const Gallery = props =>{
             src={picture.src.original+"?auto=compress&cs=tinysrgb&fit=crop&h=300&w=200"}//portrait
             width={200}
             height={300}
-            onClick={()=>!ctx.isPageLoading? ctx.setPopupImageId(index) : ""}
+            onClick={()=>!ctx.isPageLoading? ctx.setPopupImageId(index, ctx.setIsPopupShow(true)) : ""}
             alt={picture.alt}
             // placeholderSrc="loading.gif"
             />
