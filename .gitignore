@@ -27,3 +27,4 @@ yarn-error.log*
 stories
 .storybook
 src/components/pages.stories.js
+deploy

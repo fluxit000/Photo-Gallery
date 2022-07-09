@@ -14,8 +14,6 @@ function App() {
 
   const ctx = useContext(galleryAPI)
   const render = ctx.isPopupShow
-
-  console.log(render)
   
 
   return (<div id='contner'>

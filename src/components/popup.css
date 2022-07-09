@@ -35,10 +35,24 @@
     }
 }
 
+@keyframes image-change {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
 #popup>img{
     max-height: 94%;
     max-width: 60%;
     margin: 2px;
+}
+.popup-image-change{
+    opacity: 0;
+    animation: image-change 0.5s both;
+    animation-delay: 0.3s;
 }
 
 #popup>button{
