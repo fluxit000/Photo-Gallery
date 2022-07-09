@@ -48,6 +48,7 @@
     max-height: 94%;
     max-width: 60%;
     margin: 2px;
+    opacity: 1;
 }
 .popup-image-change{
     opacity: 0;

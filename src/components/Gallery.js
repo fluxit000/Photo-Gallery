@@ -15,7 +15,7 @@ const Gallery = props =>{
     {ctx.isError && <div className="error"><img src="/error.png"/><h1>Something go wrong</h1></div>}
     {!ctx.isError && ctx.pictures.length === 0 && <div className="error"><img src="/error.png"/><h1>Not found any images</h1></div>}
     {ctx.pictures.map((picture, index)=>
-        <div className={"picture-holder "} key={picture.id}>
+        <div className="picture-holder" key={picture.id}>
             <LazyLoadImage
             className="picture"
             src={picture.src.original+"?auto=compress&cs=tinysrgb&fit=crop&h=300&w=200"}//portrait
