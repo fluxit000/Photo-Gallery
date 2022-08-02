@@ -7,12 +7,20 @@ const Popup = ({state}) =>{
     const ctx = useContext(galleryAPI)
     const [imageChange, setImageChange] = useState(false)
 
+    const [imageIsLoad, setImageIsLoad] = useState(false)
+
     const onImageChange = ()=>{
-        setImageChange(true)
-        setTimeout(()=>{
-            setImageChange(false)
-        },800)
+        setImageIsLoad(true)
     }
+
+    useEffect(()=>{
+        if(!imageIsLoad){
+            setImageChange(true)
+            setTimeout(()=>{
+                setImageChange(false)
+            },780)
+        }
+    },[imageIsLoad])
 
     const onBackgroundClick = e =>{
         if(e.target.id === "popup"){
@@ -21,7 +29,6 @@ const Popup = ({state}) =>{
     }
 
     const switchImage = direction=>{
-        console.log(imageChange)
         if(imageChange){
             return
         }
@@ -62,10 +69,11 @@ const Popup = ({state}) =>{
     return <div id='popup' className={state === "exiting"? "popup-close": "popup-open"} onClick={onBackgroundClick}>
         <button className='left' onClick={()=>switchImage("left")}></button>
         <LazyLoadImage
-        className={imageChange? "popup-image-change": ""}
+        className={(imageChange? "popup-image-change": "")}
         src={ctx.pictures[ctx.popupImageId].src.portrait}
         height={1200}
         width={600}
+        onLoad={()=>{setImageIsLoad(false)}}
         />
         <button className='right' onClick={()=>switchImage("right")}></button>
     </div>
