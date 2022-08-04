@@ -9,10 +9,6 @@ const Popup = ({state}) =>{
 
     const [imageIsLoad, setImageIsLoad] = useState(false)
 
-    const onImageChange = ()=>{
-        setImageIsLoad(true)
-    }
-
     useEffect(()=>{
         if(!imageIsLoad){
             setImageChange(true)
@@ -32,20 +28,23 @@ const Popup = ({state}) =>{
         if(imageChange){
             return
         }
+        else{
+            setImageIsLoad(true)
+        }
         if(direction === "left"){
             if(ctx.popupImageId === 0){
-                ctx.setPopupImageId(ctx.pictures.length-1, onImageChange())
+                ctx.setPopupImageId(ctx.pictures.length-1)
             }
             else{
-                ctx.setPopupImageId((currentVal)=>{return currentVal-1}, onImageChange())
+                ctx.setPopupImageId((currentVal)=>{return currentVal-1})
             }
         }
         else{
             if(ctx.popupImageId === ctx.pictures.length-1){
-                ctx.setPopupImageId(0, onImageChange())
+                ctx.setPopupImageId(0)
             }
             else{
-                ctx.setPopupImageId((currentVal)=>{return currentVal+1}, onImageChange())
+                ctx.setPopupImageId((currentVal)=>{return currentVal+1})
             }
         }
     }
