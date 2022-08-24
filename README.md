@@ -1,6 +1,6 @@
 # Photo Galley
 This project was create using [Pexels](https://www.pexels.com/) API.  
-This project you can preview for this [link](https://gallery.bieda.it/).
+This project you can preview for this [link](https://gallery.fluxit.tk/).
 
 
 # preview site
