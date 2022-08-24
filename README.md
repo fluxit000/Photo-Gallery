@@ -4,5 +4,5 @@ This project you can preview for this [link](https://gallery.bieda.it/).
 
 
 # preview site
-![alt text](https://gallery.bieda.it/img/site.png)
-![alt text](https://gallery.bieda.it/img/popu.png)
+![alt text](https://gallery.fluxit.tk/img/site.png)
+![alt text](https://gallery.fluxit.tk/img/popu.png)
