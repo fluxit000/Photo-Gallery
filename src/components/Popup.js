@@ -41,7 +41,7 @@ const Popup = ({state}) =>{
                 dispatch(galleryAPI.setPopupImageId(pictures.length-1))
             }
             else{
-                dispatch(galleryAPI.setPopupImageId((currentVal)=>{return currentVal-1}))
+                dispatch(galleryAPI.setPopupImageId(popupImageId-1))
             }
         }
         else{
@@ -49,7 +49,7 @@ const Popup = ({state}) =>{
                 dispatch(galleryAPI.setPopupImageId(0))
             }
             else{
-                dispatch(galleryAPI.setPopupImageId((currentVal)=>{return currentVal+1}))
+                dispatch(galleryAPI.setPopupImageId(popupImageId+1))
             }
         }
     }

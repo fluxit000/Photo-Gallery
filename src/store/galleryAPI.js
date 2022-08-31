@@ -37,11 +37,10 @@ const gallery = createSlice({
       state.isPageLoading = false
     },
     setPopupImageId(state, action){
-      state.isPopupShow = true
       state.popupImageId = action.payload
     },
     setIsPopupShow(state, action){
-
+      state.isPopupShow = action.payload
     }
   }
 })

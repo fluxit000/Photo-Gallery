@@ -16,6 +16,10 @@ const Gallery = props =>{
         dispatch(fetchPictures(""))
     },[])
 
+    const showPopup = (index)=>{
+        dispatch(galleryAPI.setPopupImageId(index))
+        dispatch(galleryAPI.setIsPopupShow(true))
+    }
 
     return <div id="picture-container" className={isPageLoading? "loading" : ""}>
     {isError && <div className="error"><img src="/error.png"/><h1>Something go wrong</h1></div>}
@@ -28,7 +32,7 @@ const Gallery = props =>{
             src={picture.src.original+"?auto=compress&cs=tinysrgb&fit=crop&h=300&w=200"}//portrait
             width={200}
             height={300}
-            onClick={()=>!isPageLoading? dispatch(galleryAPI.setPopupImageId(index)) : ""}
+            onClick={()=>!isPageLoading? showPopup(index) : ""}
             alt={picture.alt}
             // placeholderSrc="loading.gif"
             />
