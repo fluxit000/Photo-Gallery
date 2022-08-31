@@ -6,19 +6,19 @@ import { Transition } from 'react-transition-group';
 import Gallery from './components/Gallery';
 import SearchInput from './components/SearchInput'
 import Popup from './components/Popup';
-import galleryAPI from './store/galleryAPI';
+import {galleryAPI} from './store/galleryAPI';
 import Pages from "./components/pages"
+import { useDispatch, useSelector } from 'react-redux';
 
 function App() {
 
-
-  const ctx = useContext(galleryAPI)
-  const render = ctx.isPopupShow
+  const dispatch = useDispatch()
+  const render = useSelector(s=>s.isPopupShow)
   
 
   return (<div id='contner'>
       <main>
-        <Transition in={render} onExited={()=>ctx.setPopupImageId(-1)} timeout={500}>
+        <Transition in={render} onExited={()=>dispatch(galleryAPI.setPopupImageId(-1))} timeout={500}>
           {state => (
             state !== "exited" && <Popup state={state}/>
           )}

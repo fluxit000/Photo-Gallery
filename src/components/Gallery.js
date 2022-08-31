@@ -1,27 +1,33 @@
 import {useContext, useEffect} from "react"
 import './gallery.css'
-import galleryAPI from "../store/galleryAPI"
+import {galleryAPI, fetchPictures} from "../store/galleryAPI"
 import { LazyLoadImage } from "react-lazy-load-image-component"
+import { useDispatch, useSelector } from "react-redux"
 
 const Gallery = props =>{
-    const ctx = useContext(galleryAPI)
+    const pictures = useSelector(s=>s.pictures)
+    const isPageLoading = useSelector(s=>s.isPageLoading)
+    const isError = useSelector(s=>s.isError)
+
+    const dispatch = useDispatch()
 
     useEffect(()=>{
-        ctx.fetchPictures("")
+        dispatch(fetchPictures(""))
     },[])
 
 
-    return <div id="picture-container" className={ctx.isPageLoading? "loading" : ""}>
-    {ctx.isError && <div className="error"><img src="/error.png"/><h1>Something go wrong</h1></div>}
-    {!ctx.isError && ctx.pictures.length === 0 && <div className="error"><img src="/error.png"/><h1>Not found any images</h1></div>}
-    {ctx.pictures.map((picture, index)=>
+    return <div id="picture-container" className={isPageLoading? "loading" : ""}>
+    {isError && <div className="error"><img src="/error.png"/><h1>Something go wrong</h1></div>}
+    {!isError && pictures.length === 0 && <div className="error"><img src="/error.png"/><h1>Not found any images</h1></div>}
+
+    {pictures.map((picture, index)=>
         <div className="picture-holder" key={picture.id}>
             <LazyLoadImage
             className="picture"
             src={picture.src.original+"?auto=compress&cs=tinysrgb&fit=crop&h=300&w=200"}//portrait
             width={200}
             height={300}
-            onClick={()=>!ctx.isPageLoading? ctx.setPopupImageId(index, ctx.setIsPopupShow(true)) : ""}
+            onClick={()=>!isPageLoading? dispatch(galleryAPI.setPopupImageId(index)) : ""}
             alt={picture.alt}
             // placeholderSrc="loading.gif"
             />

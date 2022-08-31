@@ -1,73 +1,77 @@
-import { useContext, useEffect } from 'react'
-import GalleryAPI from '../store/galleryAPI'
 import './pages.css'
+import { useDispatch, useSelector } from "react-redux"
+import { galleryAPI } from '../store/galleryAPI'
 
 const Pages = props =>{
-    const ctx = useContext(GalleryAPI)
+    const currentPageNumber = useSelector(s=>s.currentPageNumber)
+    const lastPageNumber = useSelector(s=>s.lastPageNumber)
+    const isPageLoading = useSelector(s=>s.isPageLoading)
+    
+    const dispatch = useDispatch()
 
     let toMap = []
 
     const pagesRender = ()=> {
-        if(ctx.lastPageNumber <= 0){
+        if(lastPageNumber <= 0){
             return
         }
         toMap = []
         const wohMuchStep = 4
-        if(ctx.currentPageNumber === 1){
+        if(currentPageNumber === 1){
             for(let i = 1; i <= wohMuchStep +2; i++){
-                if(i === ctx.lastPageNumber){
-                    toMap.push(ctx.lastPageNumber)
+                if(i === lastPageNumber){
+                    toMap.push(lastPageNumber)
                     break;
                 }
                 else if (i === wohMuchStep +2){
                     toMap.push("...")
-                    toMap.push(ctx.lastPageNumber)
+                    toMap.push(lastPageNumber)
                 }
                 else{
                     toMap.push(i)
                 }
             }
         }
-        else if(ctx.currentPageNumber === ctx.lastPageNumber){
-            if(ctx.currentPageNumber-wohMuchStep > 1){
+        else if(currentPageNumber === lastPageNumber){
+            if(currentPageNumber-wohMuchStep > 1){
                 toMap.push(1)
                 toMap.push("...")
             }
-            for(let i = ctx.currentPageNumber-wohMuchStep<0? 1:ctx.currentPageNumber-wohMuchStep; i <= ctx.lastPageNumber; i++){
+            for(let i = currentPageNumber-wohMuchStep<0? 1:currentPageNumber-wohMuchStep; i <= lastPageNumber; i++){
                 toMap.push(i)
             }
         }
         else{
-            if(ctx.currentPageNumber-wohMuchStep > 2){
+            if(currentPageNumber-wohMuchStep > 2){
                 toMap.push(1)
                 toMap.push("...")
             }
-            else if(ctx.currentPageNumber > wohMuchStep+1){
+            else if(currentPageNumber > wohMuchStep+1){
                 toMap.push(1)
             }
-            for(let i = ctx.currentPageNumber-wohMuchStep<0? 1:ctx.currentPageNumber-wohMuchStep; i <=  ctx.currentPageNumber; i++){
-                if(i === ctx.currentPageNumber || i === 0){
+            for(let i = currentPageNumber-wohMuchStep<0? 1:currentPageNumber-wohMuchStep; i <=  currentPageNumber; i++){
+                if(i === currentPageNumber || i === 0){
                     continue
                 }
-                else if(ctx.lastPageNumber === i){
+                else if(lastPageNumber === i){
                     break;
                 }
                 toMap.push(i)
             }
-            toMap.push(ctx.currentPageNumber)
-            for(let i = ctx.currentPageNumber+1; i <= ctx.currentPageNumber+wohMuchStep; i++){
-                if(i === ctx.currentPageNumber){
+            toMap.push(currentPageNumber)
+            for(let i = currentPageNumber+1; i <= currentPageNumber+wohMuchStep; i++){
+                if(i === currentPageNumber){
                     continue
                 }
-                else if(ctx.lastPageNumber === i){
+                else if(lastPageNumber === i){
                     toMap.push(i)
                     break;
                 }
                 toMap.push(i)
             }
-            if(ctx.currentPageNumber+wohMuchStep < ctx.lastPageNumber){
+            if(currentPageNumber+wohMuchStep < lastPageNumber){
                 toMap.push("...")
-                toMap.push(ctx.lastPageNumber)
+                toMap.push(lastPageNumber)
             }
         }
     }
@@ -77,19 +81,19 @@ const Pages = props =>{
 
 
     const onChangePage = page =>{
-        if(page.target.outerText !== "..." && page.target.outerText != ctx.currentPageNumber){
-            ctx.onSetCurrentPN(Number(page.target.outerText))
+        if(page.target.outerText !== "..." && page.target.outerText != currentPageNumber){
+            dispatch(galleryAPI.onSetCurrentPN(Number(page.target.outerText)))
         }
     }
 
-    return <div id="pages-container" className={ctx.isPageLoading? "loading" : ""}>
+    return <div id="pages-container" className={isPageLoading? "loading" : ""}>
         {/* <div className="number-holder">1</div>
         <div className="number-holder">2</div>
         <div className="number-holder">3</div>
         <div className="number-holder">4</div>
-        <div className='number-holder'>{ctx.lastPageNumber}</div> */}
+        <div className='number-holder'>{lastPageNumber}</div> */}
         {toMap.map((number, i)=>
-            <div key={i} onClick={onChangePage} className={"number-holder "+(number === "..."? "" : "enable")+(number == ctx.currentPageNumber? " current" : "")}>{number}</div>
+            <div key={i} onClick={onChangePage} className={"number-holder "+(number === "..."? "" : "enable")+(number == currentPageNumber? " current" : "")}>{number}</div>
         )}
         
     </div>

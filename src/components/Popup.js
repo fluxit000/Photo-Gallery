@@ -1,10 +1,15 @@
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import './popup.css'
-import galleryAPI from "../store/galleryAPI"
+import {galleryAPI} from "../store/galleryAPI"
 import { useContext, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Popup = ({state}) =>{
-    const ctx = useContext(galleryAPI)
+    const popupImageId = useSelector(s=>s.popupImageId)
+    const pictures = useSelector(s=>s.pictures)
+
+    const dispatch = useDispatch()
+
     const [imageChange, setImageChange] = useState(false)
 
     const [imageIsLoad, setImageIsLoad] = useState(false)
@@ -20,7 +25,7 @@ const Popup = ({state}) =>{
 
     const onBackgroundClick = e =>{
         if(e.target.id === "popup"){
-            ctx.setIsPopupShow(false)
+            dispatch(galleryAPI.setIsPopupShow(false))
         }
     }
 
@@ -32,19 +37,19 @@ const Popup = ({state}) =>{
             setImageIsLoad(true)
         }
         if(direction === "left"){
-            if(ctx.popupImageId === 0){
-                ctx.setPopupImageId(ctx.pictures.length-1)
+            if(popupImageId === 0){
+                dispatch(galleryAPI.setPopupImageId(pictures.length-1))
             }
             else{
-                ctx.setPopupImageId((currentVal)=>{return currentVal-1})
+                dispatch(galleryAPI.setPopupImageId((currentVal)=>{return currentVal-1}))
             }
         }
         else{
-            if(ctx.popupImageId === ctx.pictures.length-1){
-                ctx.setPopupImageId(0)
+            if(popupImageId === pictures.length-1){
+                dispatch(galleryAPI.setPopupImageId(0))
             }
             else{
-                ctx.setPopupImageId((currentVal)=>{return currentVal+1})
+                dispatch(galleryAPI.setPopupImageId((currentVal)=>{return currentVal+1}))
             }
         }
     }
@@ -62,14 +67,14 @@ const Popup = ({state}) =>{
         window.addEventListener('keydown', onArrowClick)
 
         return ()=> window.removeEventListener('keydown', onArrowClick)
-    },[ctx.popupImageId, imageChange])
+    },[popupImageId, imageChange])
     
 
     return <div id='popup' className={state === "exiting"? "popup-close": "popup-open"} onClick={onBackgroundClick}>
         <button className='left' onClick={()=>switchImage("left")}></button>
         <LazyLoadImage
         className={(imageChange? "popup-image-change": "")}
-        src={ctx.pictures[ctx.popupImageId].src.portrait}
+        src={pictures[popupImageId].src.portrait}
         height={1200}
         width={600}
         onLoad={()=>{setImageIsLoad(false)}}

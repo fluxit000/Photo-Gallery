@@ -1,15 +1,16 @@
 import { useEffect, useState,useContext } from 'react'
 import './searchInput.css'
-import galleryAPI from "../store/galleryAPI"
+import {galleryAPI, fetchPictures} from "../store/galleryAPI"
+import { useDispatch } from 'react-redux'
 
 const SearchInput = props =>{
     const [searchValue, setSearchValue] = useState("")
 
-    const ctx = useContext(galleryAPI)
+    const dispatch = useDispatch()
 
     useEffect(()=>{
         const timeOut = setTimeout(() => {
-            ctx.fetchPictures(searchValue)
+            dispatch(fetchPictures(searchValue))
         }, 500);
 
         return ()=>clearTimeout(timeOut)
