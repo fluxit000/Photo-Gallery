@@ -1,6 +1,7 @@
 import { useEffect, useState,useContext } from 'react'
 import './searchInput.css'
-import {galleryAPI, fetchPictures} from "../store/galleryAPI"
+import {galleryAPI} from "../store/galleryAPI"
+import fetchPictures from "../store/fetchPictures"
 import { useDispatch } from 'react-redux'
 
 const SearchInput = props =>{

@@ -1,6 +1,6 @@
 import './pages.css'
 import { useDispatch, useSelector } from "react-redux"
-import { galleryAPI } from '../store/galleryAPI'
+import { galleryAPI, setPage } from '../store/galleryAPI'
 
 const Pages = props =>{
     const currentPageNumber = useSelector(s=>s.currentPageNumber)
@@ -82,7 +82,7 @@ const Pages = props =>{
 
     const onChangePage = page =>{
         if(page.target.outerText !== "..." && page.target.outerText != currentPageNumber){
-            dispatch(galleryAPI.onSetCurrentPN(Number(page.target.outerText)))
+            dispatch(setPage(Number(page.target.outerText)))
         }
     }
 

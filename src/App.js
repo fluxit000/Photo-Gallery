@@ -1,6 +1,4 @@
 import './App.css';
-import { useContext } from 'react';
-
 import { Transition } from 'react-transition-group';
 
 import Gallery from './components/Gallery';

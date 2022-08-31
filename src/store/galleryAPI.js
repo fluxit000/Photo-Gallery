@@ -1,5 +1,5 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import defData from '../defData'
+
 
 const gallery = createSlice({
   name: "gallery",
@@ -21,7 +21,7 @@ const gallery = createSlice({
       state.currentQuery = action.payload.currentQuery
       state.isPageLoading = false
     },
-    onCallFetch(state, action){//on start Fetching request
+    onCallFetch(state, action){//on start fetching request
       state.isPageLoading = true
       state.isError = false
     },
@@ -31,12 +31,14 @@ const gallery = createSlice({
       state.isError = true
       state.lastPageNumber = 0
     },
+    onPageChange(state, action){
+      state.pictures = action.payload.pictures
+      state.currentPageNumber = action.payload.currentPageNumber
+      state.isPageLoading = false
+    },
     setPopupImageId(state, action){
       state.isPopupShow = true
-      state.currentPageNumber = action.payload
-    },
-    onSetCurrentPN(state, action){
-      
+      state.popupImageId = action.payload
     },
     setIsPopupShow(state, action){
 
@@ -46,53 +48,24 @@ const gallery = createSlice({
 
 export const galleryAPI = gallery.actions;
 
-
-export const fetchPictures = (query)=>{
-  return async (dispatch)=>{
-    if(query === ""){
-      dispatch(galleryAPI.setPicturesResponse({
-        currentPageNumber: 1,
-        lastPageNumber: 204, 
-        pictures: defData, 
-        currentQuery: "waterfall"
-      }))
+export const setPage = page=>{
+  return async (dispatch, getState)=>{
+    dispatch(galleryAPI.onCallFetch())
+    const fetchP = async ()=>{
+      fetch("https://api.pexels.com/v1/search?"+new URLSearchParams(
+        {query: getState().currentQuery, orientation: "landscape", page}),
+        {headers: {Authorization: "563492ad6f917000010000018f1e5fe94faf400987592c0a0cf15f1a"}}
+      )
+      .then((response)=>response.json())
+      .then((response)=>{
+          dispatch(galleryAPI.onPageChange({pictures: response.photos, currentPageNumber: page}))
+      })
+      .catch((e)=>{
+        console.log(e)
+        dispatch(galleryAPI.onFetchError())
+      })
     }
-    else{
-      dispatch(galleryAPI.onCallFetch())
-
-      const fetchP = async ()=>{
-        fetch("https://api.pexels1.com/v1/search?"+new URLSearchParams({query, orientation: "landscape"}),
-          {headers: {Authorization: "563492ad6f917000010000018f1e5fe94faf400987592c0a0cf15f1a"}}
-        )
-        .then((response)=>response.json())
-        .then((response)=>{
-          if(response.total_results !== 0){
-
-            dispatch(galleryAPI.setPicturesResponse({
-              currentPageNumber: 1,
-              lastPageNumber: Number(((response.total_results+1)/15).toFixed(0)), 
-              pictures: response.photos, 
-              currentQuery: query
-            }))
-          }
-          else{
-            // setLastPageNumber(0)
-            // setPictures([], setIsPageLoading(false))
-            dispatch(galleryAPI.setPicturesResponse({
-              currentPageNumber: 0,
-              lastPageNumber: 0, 
-              pictures: response.photos, 
-              currentQuery: query
-            }))
-          }
-        })
-        .catch((e)=>{
-          console.log(e)
-          dispatch(galleryAPI.onFetchError())
-        })
-      }
-      await fetchP()
-    }
+    await fetchP()
   }
 }
 

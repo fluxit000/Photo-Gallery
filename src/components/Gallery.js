@@ -1,6 +1,7 @@
 import {useContext, useEffect} from "react"
 import './gallery.css'
-import {galleryAPI, fetchPictures} from "../store/galleryAPI"
+import {galleryAPI} from "../store/galleryAPI"
+import fetchPictures from "../store/fetchPictures"
 import { LazyLoadImage } from "react-lazy-load-image-component"
 import { useDispatch, useSelector } from "react-redux"
 
