@@ -1,5 +1,6 @@
 import {galleryAPI} from './galleryAPI'
 import defData from '../defData'
+import {API_KEY} from './config'
 
 export default (query)=>{
     return async (dispatch)=>{
@@ -15,7 +16,7 @@ export default (query)=>{
       else{
         const fetchP = async ()=>{
           fetch("https://api.pexels.com/v1/search?"+new URLSearchParams({query, orientation: "landscape"}),
-            {headers: {Authorization: "563492ad6f917000010000018f1e5fe94faf400987592c0a0cf15f1a"}}
+            {headers: {Authorization: API_KEY}}
           )
           .then((response)=>response.json())
           .then((response)=>{
