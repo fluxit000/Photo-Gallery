@@ -73,7 +73,7 @@ const Popup = ({state}) =>{
     return <div id='popup' className={state === "exiting"? "popup-close": "popup-open"} onClick={onBackgroundClick}>
         <button className='left' onClick={()=>switchImage("left")}></button>
         <LazyLoadImage
-        className={(imageChange? "popup-image-change": "")}
+        className={(imageChange? "popup-image-change": "")+(!imageIsLoad? " vanish":"")}
         src={pictures[popupImageId].src.portrait}
         height={1200}
         width={600}

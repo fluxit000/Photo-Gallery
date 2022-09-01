@@ -51,9 +51,11 @@
     opacity: 1;
 }
 .popup-image-change{
-    opacity: 0;
     animation: image-change 0.5s both;
     animation-delay: 0.3s;
+}
+.vanish{
+    opacity: 0;
 }
 
 #popup>button{
