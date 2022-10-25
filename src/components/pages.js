@@ -6,6 +6,7 @@ const Pages = props =>{
     const currentPageNumber = useSelector(s=>s.currentPageNumber)
     const lastPageNumber = useSelector(s=>s.lastPageNumber)
     const isPageLoading = useSelector(s=>s.isPageLoading)
+    const isPopupShow = useSelector(s=>s.isPopupShow)
     
     const dispatch = useDispatch()
 
@@ -93,7 +94,16 @@ const Pages = props =>{
         <div className="number-holder">4</div>
         <div className='number-holder'>{lastPageNumber}</div> */}
         {toMap.map((number, i)=>
-            <div key={i} onClick={onChangePage} className={"number-holder "+(number === "..."? "" : "enable")+(number == currentPageNumber? " current" : "")}>{number}</div>
+            <button 
+            key={i} 
+            onClick={onChangePage} 
+            className={"number-holder "+
+                (number === "..."? "" : "enable")+
+                (number == currentPageNumber? " current" : "")}
+            tabIndex={isPopupShow || number === "..."?-1:0}
+            >
+                {number}
+            </button>
         )}
         
     </div>

@@ -9,6 +9,7 @@ const Gallery = props =>{
     const pictures = useSelector(s=>s.pictures)
     const isPageLoading = useSelector(s=>s.isPageLoading)
     const isError = useSelector(s=>s.isError)
+    const isPopupShow = useSelector(s=>s.isPopupShow)
 
     const dispatch = useDispatch()
 
@@ -21,6 +22,11 @@ const Gallery = props =>{
         dispatch(galleryAPI.setIsPopupShow(true))
     }
 
+    const onKeyDown = (e,index)=>{
+        if(e.key === "Enter" && !isPageLoading)
+            showPopup(index)
+    }
+
     return <div id="picture-container" className={isPageLoading? "loading" : ""}>
     {isError && <div className="error"><img src="/error.png"/><h1>Something go wrong</h1></div>}
     {!isError && pictures.length === 0 && <div className="error"><img src="/error.png"/><h1>Not found any images</h1></div>}
@@ -28,6 +34,8 @@ const Gallery = props =>{
     {pictures.map((picture, index)=>
         <div className="picture-holder" key={picture.id}>
             <LazyLoadImage
+            tabIndex={isPopupShow?-1:0}
+            onKeyDown={(e)=>onKeyDown(e,index)}
             className="picture"
             src={picture.src.original+"?auto=compress&cs=tinysrgb&fit=crop&h=300&w=200"}//portrait
             width={200}
@@ -37,8 +45,8 @@ const Gallery = props =>{
             // placeholderSrc="loading.gif"
             />
             <div className="credits">
-                This <a target='blank' href={picture.url}>Photo </a> 
-                was taken by <a target='blank' href={picture.photographer_url}>{picture.photographer}</a> on Pexels.
+                This <a target='blank' href={picture.url} tabIndex={isPopupShow?-1:0}>Photo </a> 
+                was taken by <a target='blank' href={picture.photographer_url} tabIndex={isPopupShow?-1:0}>{picture.photographer}</a> on Pexels.
             </div>
         </div>
     )}
